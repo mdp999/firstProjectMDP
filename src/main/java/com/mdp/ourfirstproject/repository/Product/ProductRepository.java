@@ -1,12 +1,14 @@
-package com.mdp.ourfirstproject.repository;
+package com.mdp.ourfirstproject.repository.Product;
 
 import com.mdp.ourfirstproject.Exceptions.NoSuchProductException;
+import com.mdp.ourfirstproject.model.Product;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface IProductRepository {
+public interface ProductRepository extends CrudRepository<Product, Long> {
 
-    void create(Product product);
+    boolean create(Product product);
     Product readByID(long id) throws NoSuchProductException;
     void update(Product product);
     void delete(long id);
