@@ -12,28 +12,5 @@ public class ProductController {
         return "Hello world";
     }
 
-    @RequestMapping("/")
-    public String create()
-    {
-        return "Hello world";
-    }
-
-    @RequestMapping("/")
-    public String read()
-    {
-        return "Hello world";
-    }
-
-    @RequestMapping("/")
-    public String update()
-    {
-        return "Hello world";
-    }
-
-    @RequestMapping("/")
-    public String delete()
-    {
-        return "Hello world";
-    }
 
 }
