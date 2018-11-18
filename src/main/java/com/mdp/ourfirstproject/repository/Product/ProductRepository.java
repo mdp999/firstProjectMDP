@@ -17,6 +17,4 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
     List<Product> readByKeywordInDescription(String keyword);
     void cleanUp();
 
-
-
 }
