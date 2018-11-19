@@ -13,7 +13,6 @@ public class Item implements Serializable{
     @Column(name = "id_item")
     private Long id;
 
-    private String name;
     private BigDecimal price;
     private BigDecimal amount;
 
@@ -36,7 +35,6 @@ public class Item implements Serializable{
 
     public Item(String name, BigDecimal price, BigDecimal amount, BigDecimal fullPrice,
                 Transaction transaction, Product product, ProductCategory productCategory) {
-        this.name = name;
         this.price = price;
         this.amount = amount;
         this.fullPrice = fullPrice;
@@ -51,14 +49,6 @@ public class Item implements Serializable{
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public BigDecimal getPrice() {
