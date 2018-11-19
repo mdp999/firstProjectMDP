@@ -17,4 +17,3 @@ INSERT INTO financemanager.products (id_product, amount, category, description, 
 INSERT INTO financemanager.products (id_product, amount, category, description, name, tax, unit, producer_id) VALUES (17, 200.00, null, 'Mix pasłęcki', 'Masło', 5.00, 'GRAM', 6);
 INSERT INTO financemanager.products (id_product, amount, category, description, name, tax, unit, producer_id) VALUES (18, 450.00, null, 'Słonecznikowy', 'Chleb', 5.00, 'GRAM', 7);
 INSERT INTO financemanager.products (id_product, amount, category, description, name, tax, unit, producer_id) VALUES (19, 450.00, null, 'Żytni', 'Chleb', 5.00, 'GRAM', 7);
-INSERT INTO financemanager.products (id_product, amount, category, description, name, tax, unit, producer_id) VALUES (GENERATED, NULL, 'NULL', '', 'Galaretka', NULL, 'NULL', NULL);
