@@ -24,7 +24,7 @@ public class ItemService {
         //TODO: zaimplementować tą metodę przy użyciu ProductRepository- pobrać produkt po jego ID, a potem zapisać
     }
 
-    public Item readByID(long id) {
+    public Item readByID(Long id) {
         return itemRepository.findById(id).get();
     }
 
@@ -38,7 +38,7 @@ public class ItemService {
         //TODO: zaimplementować tą metodę przy użyciu ProductRepository- pobrać produkt po jego ID, a potem zapisać
     }
 
-    public void delete(long id) {
+    public void delete(Long id) {
         itemRepository.deleteById(id);
     }
 
