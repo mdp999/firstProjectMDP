@@ -12,8 +12,13 @@ import java.util.List;
 @RestController
 public class ProductController {
 
+
+    private ProductService productService;
+
     @Autowired
-    private ProductService productService;          // field injection (not recommended)
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping(value = "/product/create")
     public String createProductGet(Product product) {
