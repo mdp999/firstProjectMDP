@@ -2,14 +2,17 @@ package com.mdp.ourfirstproject.controller;
 
 import com.mdp.ourfirstproject.Exceptions.NoSuchProductException;
 import com.mdp.ourfirstproject.model.Product;
+import com.mdp.ourfirstproject.model.ProductCategory;
 import com.mdp.ourfirstproject.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.math.BigDecimal;
 import java.util.List;
 
-@RestController
+@Controller
 public class ProductController {
 
     private ProductService productService;
@@ -20,7 +23,10 @@ public class ProductController {
     }
 
     @GetMapping(value = "/product/create")
-    public String createProductGet(Product product) {
+    public String createProductGet(@RequestParam String name, @RequestParam BigDecimal tax,
+                                   @RequestParam String description, @RequestParam BigDecimal amount,
+                                   @RequestParam String productCategory) {
+        productService.create(name, tax, description, amount, productCategory);
         //:TODO: wczytanie szablonu w którym można dodać nowy produkt
         return "product/productAdd";
     }
@@ -31,8 +37,10 @@ public class ProductController {
     }
 
     @PutMapping(value = "/product/update/{id}")
-    public void updateProductPut(@RequestBody Product product, @PathVariable Long id) {
-        productService.update(product,id);
+    public void updateProductPut(@RequestParam Long id, @RequestParam String name, @RequestParam BigDecimal tax,
+                                 @RequestParam String description, @RequestParam BigDecimal amount,
+                                 @RequestParam String productCategory) {
+        productService.update(id, name, tax, description, amount, productCategory);
     }
 
     @DeleteMapping("/product/delete/{id}")

@@ -6,12 +6,14 @@ import com.mdp.ourfirstproject.model.Transaction;
 import com.mdp.ourfirstproject.model.TransactionType;
 import com.mdp.ourfirstproject.repository.Transaction.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class TransactionService {
 
 
@@ -22,64 +24,65 @@ public class TransactionService {
         this.transactionRepository = transactionRepository;
     }
     
-    public void create() {
-        throw new NotImplementedException();
+    public void create(String name, String description, String cashType,
+                       String transactionType, Date transferDate) {
+        transactionRepository.save(new Transaction(name, description, CashType.valueOf(cashType),
+                TransactionType.valueOf(transactionType), transferDate));
     }
 
     public Transaction readById(long id) {
-        return transactionRepository.getByID(id);
+        return transactionRepository.findById(id).get();
     }
 
-    public void update() {
+    public List<Transaction> readByName(String name) {
+        //TODO: Zaimplementować to!
+        throw new NotImplementedException();
+        //transactionRepository.findByName();
+    }
+
+    public void update(Long id, String name, String description, String cashType, String transactionType, Date transferDate) {
         throw new NotImplementedException();
     }
 
     public void delete(long id) {
-        transactionRepository.delete(id);
-        return "";
+        transactionRepository.deleteById(id);
     }
 
-    public List<Transaction> getByProductCategory(String categoryStr) {
-        ProductCategory cat = null;
-        for(ProductCategory productCategory : ProductCategory.values()) {
-            if(productCategory.toString().equals(categoryStr))
-                cat = productCategory;
-        }
-        return transactionRepository.getByProductCategory(cat);
-    }
-
-    public List<Transaction> getByTransferType(String transferString) {
-        TransactionType tType = null;
-        for(TransactionType transferType : TransactionType.values()) {
-            if(transferType.toString().equals(transferString))
-                tType = transferType;
-        }
-        return transactionRepository.getByTransferType(tType);
+    public List<Transaction> getByTransferType(String transactionString) {
+        //TODO: Zaimplementować to!
+        throw new NotImplementedException();
+        //return transactionRepository.getByTransferType(TransactionType.valueOf(transactionString));
     }
 
     public List<Transaction> getByCashType(String cashString)
     {
-        CashType cType = null;
-        for(CashType cashType : CashType.values()) {
-            if(cashType.toString().equals(cashString))
-                cType = cashType;
-        }
-        return transactionRepository.getByCashType(cType);
+        //TODO: Zaimplementować to!
+        throw new NotImplementedException();
+        //return transactionRepository.getByCashType(CashType.valueOf(cashString));
     }
 
     public List<Transaction> getByDate(Date minDate, Date maxDate)
     {
-        return transactionRepository.getByDate(minDate,maxDate);
+        //TODO: Zaimplementować to!
+        throw new NotImplementedException();
+        //return transactionRepository.getByDate(minDate,maxDate);
     }
 
     public List<Transaction> getByCashAmount(BigDecimal minAmount, BigDecimal maxAmount)
     {
-        return transactionRepository.getByCashAmount(minAmount, maxAmount);
+        //TODO: Zaimplementować to!
+        throw new NotImplementedException();
+        //return transactionRepository.getByCashAmount(minAmount, maxAmount);
     }
 
-    public List<Transaction> getAll() {
-        return transactionRepository.findAll();
+    public List<Transaction> readAll() {
+        //TODO: Zaimplementować to!
+        throw new NotImplementedException();
+        //return transactionRepository.findAll();
     }
-    
-    
+
+    public List<Transaction> readByKeywordInDescription(String keyword) {
+        //TODO: Zaimplementować to!
+        throw new NotImplementedException();
+    }
 }
