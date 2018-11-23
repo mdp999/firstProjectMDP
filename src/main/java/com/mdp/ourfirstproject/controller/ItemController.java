@@ -11,8 +11,13 @@ import java.math.BigDecimal;
 @Controller
 public class ItemController {
 
-    @Autowired
+
     private ItemService itemService;
+
+    @Autowired
+    public ItemController(ItemService itemService) {
+        this.itemService = itemService;
+    }
 
     @RequestMapping("/")
     public String hello()
@@ -25,7 +30,6 @@ public class ItemController {
     {
         //:TODO: wczytanie szablonu w którym można dodać nową transakcję
         throw new NotImplementedException();
-        //return "Hello world";
     }
 
     @PostMapping(value = "/item/create")
@@ -33,7 +37,6 @@ public class ItemController {
     {
         itemService.create(productId, price, amount);
         throw new NotImplementedException();
-//        return "Hello world";
     }
 
     @GetMapping(value = "/item/read/id/{id}/")
@@ -41,7 +44,6 @@ public class ItemController {
     {
         itemService.readByID(id);
         throw new NotImplementedException();
-//        return "Hello world";
     }
 
     @GetMapping(value = "/item/read/name/{name}/")
@@ -49,7 +51,6 @@ public class ItemController {
     {
         itemService.readByName(productName);
         throw new NotImplementedException();
-//        return "Hello world";
     }
 
     @GetMapping(value = "/item/read/keyword/{keyword}/")
@@ -57,7 +58,6 @@ public class ItemController {
     {
         itemService.readByKeywordInDescription(keyword);
         throw new NotImplementedException();
-//        return "Hello world";
     }
 
     @GetMapping(value = "/item/readall/")
@@ -65,7 +65,6 @@ public class ItemController {
     {
         itemService.readAll();
         throw new NotImplementedException();
-//        return "Hello world";
     }
 
     @GetMapping(value = "/item/update")
@@ -73,7 +72,6 @@ public class ItemController {
     {
         //:TODO: wczytanie szablonu w którym można dodać edytować transakcję
         throw new NotImplementedException();
-        //return "Hello world";
     }
 
     @PostMapping(value = "/item/update")
@@ -81,7 +79,6 @@ public class ItemController {
     {
         itemService.update(itemId, productId, price, amount);
         throw new NotImplementedException();
-//        return "Hello world";
     }
 
     @DeleteMapping(value = "/item/delete/{id}")
