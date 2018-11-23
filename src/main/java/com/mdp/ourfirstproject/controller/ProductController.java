@@ -12,7 +12,6 @@ import java.util.List;
 @RestController
 public class ProductController {
 
-
     private ProductService productService;
 
     @Autowired
@@ -23,7 +22,6 @@ public class ProductController {
     @GetMapping(value = "/product/create")
     public String createProductGet(Product product) {
         //:TODO: wczytanie szablonu w którym można dodać nowy produkt
-        //throw new NotImplementedException();
         return "product/productAdd";
     }
 
@@ -44,7 +42,7 @@ public class ProductController {
 
     @GetMapping(value = "/product/read/name/{name}")
     public List<Product> readProductByName(@PathVariable String name) {
-        return null;
+        return productService.readByName(name);
     }
 
     @RequestMapping(value = "/product/readall")
@@ -52,19 +50,12 @@ public class ProductController {
         return productService.readAll();
     }
 
-
     @RequestMapping(value = "/product/read/keyword/{keyword}")
     public String readProductByKeywordInDescription(@PathVariable String keyword) {
         productService.readByKeywordInDescription(keyword);
         throw new NotImplementedException();
-//        return "Hello world";
     }
 
-//    @RequestMapping("/")
-//    public String hello()
-//    {
-//        return "Hello world";
-//    }
 
 
 }
