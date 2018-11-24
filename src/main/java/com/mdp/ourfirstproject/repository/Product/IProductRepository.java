@@ -10,8 +10,8 @@ public interface IProductRepository {
     boolean deleteById(long id) throws ProductException;
     boolean update(Product transfer) throws ProductException;
     Product findById(long id) throws ProductException;
-    Product findByName(String productName);
-    List<Product> findByProducer(String producerName);
+    List<Product> readByKeywordInDescription(String keyword);
+    List<Product> findByName(String productName);
     List<Product> findAll();
     void cleanUp();
 

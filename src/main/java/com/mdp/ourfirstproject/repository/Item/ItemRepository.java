@@ -2,11 +2,14 @@ package com.mdp.ourfirstproject.repository.Item;
 
 import com.mdp.ourfirstproject.model.Item;
 import com.mdp.ourfirstproject.model.ItemCategory;
+import com.mdp.ourfirstproject.model.Product;
 import com.mdp.ourfirstproject.repository.util.PersistenceUtilFactory;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ItemRepository implements IItemRepository {
@@ -82,22 +85,16 @@ public class ItemRepository implements IItemRepository {
     }
 
     @Override
-    public Item findByName(String itemName) {
-//        Product product = entityManager.createQuery("Select product from Product product where product.name LIKE :pName", Product.class)
-//                .setParameter("pName", "%"+productName+"%").getSingleResult();
-        Item item = entityManager.createQuery("Select item from Item item where item.name LIKE :iName", Item.class)
-                .setParameter("iName", "%"+itemName+"%").getSingleResult();
-        return item;
+    public List<Item> findByName(String itemName) {
+        Query query = entityManager.createQuery("Select item from Item item where item.name LIKE :iName", Item.class)
+                .setParameter("iName", "%"+itemName+"%");
+        List<Item> items = query.getResultList();
+        return items;
     }
 
     @Override
     public List<Item> findByProductCategory(ItemCategory itemCategory) {
         throw new NotImplementedException();
-//        List<Product> products = new ArrayList<>();
-//        Query query = entityManager.createQuery("Select item from Item item where item.category=:pCategory", Item.class);
-//        query.setParameter("pCategory", itemCategory);
-//        products = query.getResultList();
-//        return products;
     }
 
     @Override
@@ -117,6 +114,14 @@ public class ItemRepository implements IItemRepository {
     @Override
     public void cleanUp() {
         entityManager.close();
+    }
+
+    @Override
+    public List<Item> findByKeywordInDescription(String keyword) {
+        Query query = entityManager.createQuery("Select item from Item item where item.description LIKE :iName", Item.class)
+                .setParameter("iName", "%"+keyword+"%");
+        List<Item> items = query.getResultList();
+        return items;
     }
 
 }

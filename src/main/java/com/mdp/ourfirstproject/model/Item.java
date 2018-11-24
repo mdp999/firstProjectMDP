@@ -33,6 +33,24 @@ public class Item implements Serializable{
     public Item() {
     }
 
+
+    public Item(Product product, BigDecimal price,
+                BigDecimal amount, ItemCategory itemCategory) {
+        this.price = price;
+        this.amount = amount;
+        this.product = product;
+        this.itemCategory = itemCategory;
+    }
+
+    public Item(Long id, Product product, BigDecimal price,
+                BigDecimal amount, ItemCategory itemCategory) {
+        this.id = id;
+        this.price = price;
+        this.amount = amount;
+        this.product = product;
+        this.itemCategory = itemCategory;
+    }
+
     public Item(String name, BigDecimal price, BigDecimal amount, BigDecimal fullPrice,
                 Transaction transaction, Product product, ItemCategory itemCategory) {
         this.price = price;

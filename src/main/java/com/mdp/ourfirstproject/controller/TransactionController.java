@@ -10,7 +10,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.Date;
 import java.util.List;
 
-@Controller
+@RestController
 public class TransactionController {
 
     private TransactionService transactionService = new TransactionService();

@@ -5,8 +5,6 @@ import com.mdp.ourfirstproject.repository.util.PersistenceUtilFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProductRepository implements IProductRepository {
@@ -71,40 +69,34 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public Product findById(long id) throws ProductException {
-        Product transfer = entityManager.find(Product.class, id);
-        if(transfer ==null)
+        Product product = entityManager.find(Product.class, id);
+        if(product ==null)
         {
             throw new ProductException("Problem z pobraniem");
         }
-        return transfer;
-    }
-
-    @Override
-    public Product findByName(String productName) {
-//        Product product = entityManager.createQuery("Select product from Product product where product.name LIKE :pName", Product.class)
-//                .setParameter("pName", "%"+productName+"%").getSingleResult();
-        Product product = entityManager.createQuery("Select product from Product product where product.name LIKE :pName", Product.class)
-                .setParameter("pName", "%"+productName+"%").getSingleResult();
-        //System.out.println(product.toString());
         return product;
     }
 
+    @Override
+    public List<Product> readByKeywordInDescription(String keyword) {
+        List<Product> products = entityManager.createQuery("Select product from Product product where product.description LIKE :pDescription", Product.class)
+                .setParameter("pDescription", "%"+keyword+"%").getResultList();
+        return products;
+    }
 
     @Override
-    public List<Product> findByProducer(String producerName) {
-        List<Product> transfers = new ArrayList<>();
-        Query query = entityManager.createQuery("Select product from Product product left outer join product.producer producer where producer.name=:pName", Product.class);
-        query.setParameter("pName", producerName);
-        transfers = query.getResultList();
-        return transfers;
+    public List<Product> findByName(String productName) {
+        List<Product> products = entityManager.createQuery("Select product from Product product where product.name LIKE :pName", Product.class)
+                .setParameter("pName", "%"+productName+"%").getResultList();
+        return products;
     }
 
     @Override
     public List<Product> findAll() {
-        List<Product> results = entityManager
+        List<Product> products = entityManager
                 .createQuery("Select product from Product product", Product.class)
                 .getResultList();
-        return results;
+        return products;
     }
 
     @Override

@@ -1,15 +1,11 @@
 package com.mdp.ourfirstproject.controller;
 
-import com.mdp.ourfirstproject.model.Product;
-import com.mdp.ourfirstproject.repository.Product.ProductException;
 import com.mdp.ourfirstproject.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
-import java.util.List;
 
-@Controller
+@RestController
 public class ProductController {
 
     private ProductService productService = new ProductService();
@@ -17,53 +13,62 @@ public class ProductController {
     @GetMapping(value = "/product/create")
     public String createProductGet()
     {
-        return "product/productAdd";
+        return "add new product";
     }
 
     @PostMapping(value = "/product/create")
     public String createProductPost(@RequestParam String name, @RequestParam BigDecimal tax,
                                    @RequestParam String description, @RequestParam BigDecimal amount,
                                    @RequestParam String productCategory) {
-        productService.create(name, tax, description, amount, productCategory);
-        //:TODO: wczytanie szablonu w którym można dodać nowy produkt
-        return "product/productAdd";
+        if(productService.create(name, tax, description, amount, productCategory))
+            return "Poszło";
+        else
+            return "Wystąpił błąd";
     }
 
     @GetMapping(value = "/product/read/id/{id}")
-    public Product readProductByIdGet(@PathVariable("id") Long id){
-        return productService.readById(id);
+    public String readProductByIdGet(@PathVariable("id") Long id){
+        return productService.readById(id).toString();
     }
 
     @PutMapping(value = "/product/update/{id}")
-    public void updateProductPut(@RequestParam Long id, @RequestParam String name, @RequestParam BigDecimal tax,
+    public String updateProductPut(@RequestParam Long id, @RequestParam String name, @RequestParam BigDecimal tax,
                                  @RequestParam String description, @RequestParam BigDecimal amount,
                                  @RequestParam String productCategory) {
-        productService.update(id, name, tax, description, amount, productCategory);
+
+        if(productService.update(id, name, tax, description, amount, productCategory))
+            return "Poszło!";
+        else
+            return "Nie działa";
     }
 
     @DeleteMapping("/product/delete/{id}")
-    public void deleteProductDelete(@PathVariable Long id) {
-        try {
-            productService.delete(id);
-        } catch (ProductException e) {
-            e.printStackTrace();
-        }
+    public String deleteProductDelete(@PathVariable Long id) {
+        if(productService.delete(id))
+            return "Poszło!";
+        else
+            return "Nie działa";
     }
 
     @GetMapping(value = "/product/read/name/{name}")
-    public Product readProductByName(@PathVariable String name) {
-        return productService.readByName(name);
+    public String readProductByName(@PathVariable String name) {
+        StringBuilder sb = new StringBuilder();
+        productService.readByName(name).forEach(x->sb.append(x.toString()).append("\n"));
+        return sb.toString();
     }
 
-    @RequestMapping(value = "/product/readall")
-    public List<Product> readProductAll() {
-        return productService.readAll();
+    @GetMapping(value = "/product/readall")
+    public String readProductAll() {
+        StringBuilder sb = new StringBuilder();
+        productService.readAll().stream().forEach(x->sb.append(x.toString()).append("\n"));
+        return sb.toString();
     }
 
-    @RequestMapping(value = "/product/read/keyword/{keyword}")
+    @GetMapping(value = "/product/read/keyword/{keyword}")
     public String readProductByKeywordInDescription(@PathVariable String keyword) {
-        productService.readByKeywordInDescription(keyword);
-        return "";
+        StringBuilder sb = new StringBuilder();
+        productService.readByKeywordInDescription(keyword).stream().forEach(x->sb.append(x.toString()).append("\n"));
+        return sb.toString();
     }
 
 

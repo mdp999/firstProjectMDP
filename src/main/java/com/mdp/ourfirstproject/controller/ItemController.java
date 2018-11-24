@@ -9,16 +9,10 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.math.BigDecimal;
 
-@Controller
+@RestController
 public class ItemController {
 
     private ItemService itemService = new ItemService();
-
-    @RequestMapping("/")
-    public String hello()
-    {
-        return "Hello world";
-    }
 
     @GetMapping(value = "/item/create")
     public String createItemGet()
@@ -29,20 +23,16 @@ public class ItemController {
 
     @PostMapping(value = "/item/create")
     public String createItemPost(@RequestParam Long productId, @RequestParam BigDecimal price,
-                                 @RequestParam BigDecimal amount)
+                                 @RequestParam BigDecimal amount, @RequestParam String itemCategory)
     {
-        itemService.create(productId, price, amount);
+        itemService.create(productId, price, amount, itemCategory);
         throw new NotImplementedException();
     }
 
     @GetMapping(value = "/item/read/id/{id}/")
     public String readItemByIdGet(@RequestParam Long id)
     {
-        try {
-            itemService.readByID(id);
-        } catch (ItemException e) {
-            e.printStackTrace();
-        }
+        itemService.readByID(id);
         throw new NotImplementedException();
     }
 
@@ -75,19 +65,17 @@ public class ItemController {
     }
 
     @PostMapping(value = "/item/update")
-    public String updateItemPost(@RequestParam Long itemId, @RequestParam Long productId, @RequestParam BigDecimal price, @RequestParam BigDecimal amount)
+    public String updateItemPost(@RequestParam Long itemId, @RequestParam Long productId,
+                                 @RequestParam BigDecimal price, @RequestParam BigDecimal amount,
+                                 @RequestParam String itemCategory)
     {
-        itemService.update(itemId, productId, price, amount);
+        itemService.update(itemId, productId, price, amount, itemCategory);
         throw new NotImplementedException();
     }
 
     @DeleteMapping(value = "/item/delete/{id}")
     public String deleteItem(@PathVariable("id") long id) {
-        try {
             itemService.delete(id);
-        } catch (ItemException e) {
-            e.printStackTrace();
-        }
         return "";
     }
 

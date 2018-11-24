@@ -5,7 +5,6 @@ import com.mdp.ourfirstproject.model.Product;
 import com.mdp.ourfirstproject.repository.Product.IProductRepository;
 import com.mdp.ourfirstproject.repository.Product.ProductException;
 import com.mdp.ourfirstproject.repository.Product.ProductRepository;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -14,13 +13,15 @@ public class ProductService {
 
     private IProductRepository productRepository = new ProductRepository();
 
-    public void create(String name, BigDecimal tax, String description, BigDecimal amount, String categoryStr)
+    public boolean create(String name, BigDecimal tax, String description, BigDecimal amount, String categoryStr)
     {
         try {
             productRepository.save(new Product(name, tax, description, amount, ItemCategory.valueOf(categoryStr)));
+            return true;
         } catch (ProductException e) {
             e.printStackTrace();
         }
+        return false;
     }
     
     public Product readById(Long id){
@@ -29,19 +30,30 @@ public class ProductService {
         } catch (ProductException e) {
             e.printStackTrace();
         }
-        throw new NotImplementedException();
+        return null;
     }
 
-    public void update(Long id, String name, BigDecimal tax, String description, BigDecimal amount, String productCategory) {
-        //TODO:: NAPISAć metodę do robienia updatea
-        //productRepository.
+    public boolean update(Long id, String name, BigDecimal tax, String description, BigDecimal amount, String itemCategory) {
+        try {
+            productRepository.update(new Product(id, name, tax, description, amount, ItemCategory.valueOf(itemCategory)));
+            return true;
+        } catch (ProductException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
-    public void delete(Long id) throws ProductException {
-        productRepository.deleteById(id);
+    public boolean delete(Long id) {
+        try {
+            productRepository.deleteById(id);
+            return true;
+        } catch (ProductException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
     
-    public Product readByName(String productName) {
+    public List<Product> readByName(String productName) {
         return productRepository.findByName(productName);
     }
     
@@ -50,9 +62,7 @@ public class ProductService {
     }
     
     public List<Product> readByKeywordInDescription(String keyword) {
-        //TODO:napisać metodę w product repository do szukania produktów po słowie kluczowym w opisie
-        return null;
+        return productRepository.readByKeywordInDescription(keyword);
     }
-
 
 }

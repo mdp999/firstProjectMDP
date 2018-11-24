@@ -14,9 +14,9 @@ public interface IItemRepository {
 
     Item findById(long id) throws ItemException;
 
-    Item findByName(String itemName);
+    List<Item> findByName(String itemName);
+    List<Item> findByKeywordInDescription(String keyword);
     List<Item> findByProductCategory(ItemCategory itemCategory);
-
     List<Item> findByProduct(String productName);
 
     List<Item> findAll();

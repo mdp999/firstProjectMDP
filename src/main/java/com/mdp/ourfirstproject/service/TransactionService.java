@@ -16,14 +16,16 @@ public class TransactionService {
 
     private ITransactionRepository transactionRepository = new TransactionRepository();
     
-    public void create(String name, String description, String cashType,
+    public boolean create(String name, String description, String cashType,
                        String transactionType, Date transferDate) {
         try {
             transactionRepository.save(new Transaction(name, description, CashType.valueOf(cashType),
                     TransactionType.valueOf(transactionType), transferDate));
+            return true;
         } catch (TransactionException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     public Transaction readById(long id) {
@@ -32,7 +34,7 @@ public class TransactionService {
         } catch (TransactionException e) {
             e.printStackTrace();
         }
-        throw new NotImplementedException();
+        return null;
     }
 
     public List<Transaction> readByName(String name) {
