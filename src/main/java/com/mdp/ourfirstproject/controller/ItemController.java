@@ -33,7 +33,8 @@ public class ItemController {
     }
 
     @PostMapping(value = "/item/create")
-    public String createItemPost(@RequestParam Long productId, @RequestParam BigDecimal price, @RequestParam BigDecimal amount)
+    public String createItemPost(@RequestParam Long productId, @RequestParam BigDecimal price,
+                                 @RequestParam BigDecimal amount)
     {
         itemService.create(productId, price, amount);
         throw new NotImplementedException();
