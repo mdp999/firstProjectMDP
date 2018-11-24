@@ -1,14 +1,10 @@
 package com.mdp.ourfirstproject.controller;
 
-import com.mdp.ourfirstproject.Exceptions.NoSuchProductException;
 import com.mdp.ourfirstproject.model.Product;
-import com.mdp.ourfirstproject.model.ProductCategory;
 import com.mdp.ourfirstproject.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -23,7 +19,13 @@ public class ProductController {
     }
 
     @GetMapping(value = "/product/create")
-    public String createProductGet(@RequestParam String name, @RequestParam BigDecimal tax,
+    public String createProductGet()
+    {
+        return "product/productAdd";
+    }
+
+    @PostMapping(value = "/product/create")
+    public String createProductPost(@RequestParam String name, @RequestParam BigDecimal tax,
                                    @RequestParam String description, @RequestParam BigDecimal amount,
                                    @RequestParam String productCategory) {
         productService.create(name, tax, description, amount, productCategory);
@@ -32,7 +34,7 @@ public class ProductController {
     }
 
     @GetMapping(value = "/product/read/id/{id}")
-    public Product readProductByIdGet(@PathVariable("id") Long id) throws NoSuchProductException {
+    public Product readProductByIdGet(@PathVariable("id") Long id){
         return productService.readById(id);
     }
 
@@ -61,7 +63,7 @@ public class ProductController {
     @RequestMapping(value = "/product/read/keyword/{keyword}")
     public String readProductByKeywordInDescription(@PathVariable String keyword) {
         productService.readByKeywordInDescription(keyword);
-        throw new NotImplementedException();
+        return "";
     }
 
 

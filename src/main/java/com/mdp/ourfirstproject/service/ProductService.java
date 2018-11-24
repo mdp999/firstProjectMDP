@@ -1,6 +1,5 @@
 package com.mdp.ourfirstproject.service;
 
-import com.mdp.ourfirstproject.Exceptions.NoSuchProductException;
 import com.mdp.ourfirstproject.model.Product;
 import com.mdp.ourfirstproject.model.ProductCategory;
 import com.mdp.ourfirstproject.repository.Product.ProductRepository;
@@ -14,7 +13,6 @@ import java.util.List;
 @Service
 public class ProductService {
 
-
     private ProductRepository productRepository;
 
     @Autowired
@@ -22,12 +20,10 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-
     public void create(String name, BigDecimal tax, String description, BigDecimal amount, String categoryStr)
     {
         productRepository.save(new Product(name, tax, description, amount, ProductCategory.valueOf(categoryStr)));
     }
-
     
     public Product readById(Long id){
         return productRepository.findById(id).get();
@@ -37,7 +33,6 @@ public class ProductService {
         //TODO:: NAPISAć metodę do robienia updatea
         //productRepository.
     }
-
 
     public void delete(Long id) {
         productRepository.deleteById(id);

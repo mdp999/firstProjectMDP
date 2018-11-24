@@ -2,7 +2,6 @@ package com.mdp.ourfirstproject.service;
 
 
 import com.mdp.ourfirstproject.model.Item;
-import com.mdp.ourfirstproject.model.Product;
 import com.mdp.ourfirstproject.repository.Item.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
