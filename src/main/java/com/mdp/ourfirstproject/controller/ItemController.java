@@ -1,5 +1,6 @@
 package com.mdp.ourfirstproject.controller;
 
+import com.mdp.ourfirstproject.repository.Item.ItemException;
 import com.mdp.ourfirstproject.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,7 +38,11 @@ public class ItemController {
     @GetMapping(value = "/item/read/id/{id}/")
     public String readItemByIdGet(@RequestParam Long id)
     {
-        itemService.readByID(id);
+        try {
+            itemService.readByID(id);
+        } catch (ItemException e) {
+            e.printStackTrace();
+        }
         throw new NotImplementedException();
     }
 
@@ -78,7 +83,11 @@ public class ItemController {
 
     @DeleteMapping(value = "/item/delete/{id}")
     public String deleteItem(@PathVariable("id") long id) {
-        itemService.delete(id);
+        try {
+            itemService.delete(id);
+        } catch (ItemException e) {
+            e.printStackTrace();
+        }
         return "";
     }
 

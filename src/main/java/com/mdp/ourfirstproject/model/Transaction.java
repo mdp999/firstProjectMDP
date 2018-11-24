@@ -7,19 +7,19 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "transfers")
+@Table(name = "transactions")
 public class Transaction implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_transfer")
+    @Column(name = "id_transaction")
     private Long id;
 
     private String name;
 
     private String description;
 
-    @OneToMany(mappedBy = "transfer")
+    @OneToMany(mappedBy = "transaction")
     private List<Item> item;
 
     @Enumerated(EnumType.STRING)

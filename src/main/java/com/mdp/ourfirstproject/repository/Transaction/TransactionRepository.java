@@ -1,7 +1,7 @@
 package com.mdp.ourfirstproject.repository.Transaction;
 
 import com.mdp.ourfirstproject.model.CashType;
-import com.mdp.ourfirstproject.model.ProductCategory;
+import com.mdp.ourfirstproject.model.ItemCategory;
 import com.mdp.ourfirstproject.model.Transaction;
 import com.mdp.ourfirstproject.model.TransactionType;
 
@@ -28,7 +28,7 @@ public class TransactionRepository implements ITransactionRepository {
         try {
             entityTransaction = entityManager.getTransaction();
             entityTransaction.begin();
-            entityManager.persist(entityTransaction);
+            entityManager.persist(transaction);
             entityTransaction.commit();
             return true;
         } catch (Exception e) {
@@ -86,10 +86,10 @@ public class TransactionRepository implements ITransactionRepository {
     }
 
     @Override
-    public List<Transaction> findByProductCategory(ProductCategory productCategory) {
+    public List<Transaction> findByProductCategory(ItemCategory itemCategory) {
             List<Transaction> transactions = new ArrayList<>();
             Query query = entityManager.createQuery("Select transaction from Transaction transaction left outer join transaction.product product where product.category=:pCategory", Transaction.class);
-            query.setParameter("pCategory", productCategory);
+            query.setParameter("pCategory", itemCategory);
             transactions = query.getResultList();
             return transactions;
     }

@@ -1,7 +1,7 @@
 package com.mdp.ourfirstproject.repository.Item;
 
 import com.mdp.ourfirstproject.model.Item;
-import com.mdp.ourfirstproject.model.ProductCategory;
+import com.mdp.ourfirstproject.model.ItemCategory;
 import com.mdp.ourfirstproject.repository.util.PersistenceUtilFactory;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -91,11 +91,11 @@ public class ItemRepository implements IItemRepository {
     }
 
     @Override
-    public List<Item> findByProductCategory(ProductCategory productCategory) {
+    public List<Item> findByProductCategory(ItemCategory itemCategory) {
         throw new NotImplementedException();
 //        List<Product> products = new ArrayList<>();
 //        Query query = entityManager.createQuery("Select item from Item item where item.category=:pCategory", Item.class);
-//        query.setParameter("pCategory", productCategory);
+//        query.setParameter("pCategory", itemCategory);
 //        products = query.getResultList();
 //        return products;
     }

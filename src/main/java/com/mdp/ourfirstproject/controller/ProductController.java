@@ -1,6 +1,7 @@
 package com.mdp.ourfirstproject.controller;
 
 import com.mdp.ourfirstproject.model.Product;
+import com.mdp.ourfirstproject.repository.Product.ProductException;
 import com.mdp.ourfirstproject.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,11 +43,15 @@ public class ProductController {
 
     @DeleteMapping("/product/delete/{id}")
     public void deleteProductDelete(@PathVariable Long id) {
-        productService.delete(id);
+        try {
+            productService.delete(id);
+        } catch (ProductException e) {
+            e.printStackTrace();
+        }
     }
 
     @GetMapping(value = "/product/read/name/{name}")
-    public List<Product> readProductByName(@PathVariable String name) {
+    public Product readProductByName(@PathVariable String name) {
         return productService.readByName(name);
     }
 

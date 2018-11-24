@@ -1,7 +1,7 @@
 package com.mdp.ourfirstproject.service;
 
+import com.mdp.ourfirstproject.model.ItemCategory;
 import com.mdp.ourfirstproject.model.Product;
-import com.mdp.ourfirstproject.model.ProductCategory;
 import com.mdp.ourfirstproject.repository.Product.IProductRepository;
 import com.mdp.ourfirstproject.repository.Product.ProductException;
 import com.mdp.ourfirstproject.repository.Product.ProductRepository;
@@ -17,7 +17,7 @@ public class ProductService {
     public void create(String name, BigDecimal tax, String description, BigDecimal amount, String categoryStr)
     {
         try {
-            productRepository.save(new Product(name, tax, description, amount, ProductCategory.valueOf(categoryStr)));
+            productRepository.save(new Product(name, tax, description, amount, ItemCategory.valueOf(categoryStr)));
         } catch (ProductException e) {
             e.printStackTrace();
         }

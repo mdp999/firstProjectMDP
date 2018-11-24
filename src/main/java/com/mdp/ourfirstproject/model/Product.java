@@ -20,7 +20,7 @@ public class Product implements Serializable {
     private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
-    private ProductCategory category;
+    private ItemCategory category;
 
     public Product() {
     }
@@ -29,7 +29,7 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public Product(String name, BigDecimal tax, String description, BigDecimal amount, ProductCategory category) {
+    public Product(String name, BigDecimal tax, String description, BigDecimal amount, ItemCategory category) {
         this.name = name;
         this.tax = tax;
         this.description = description;
@@ -77,11 +77,11 @@ public class Product implements Serializable {
         this.amount = amount;
     }
 
-    public ProductCategory getCategory() {
+    public ItemCategory getCategory() {
         return category;
     }
 
-    public void setCategory(ProductCategory category) {
+    public void setCategory(ItemCategory category) {
         this.category = category;
     }
 

@@ -20,7 +20,7 @@ public class Item implements Serializable{
     private BigDecimal fullPrice;
 
     @ManyToOne
-    @JoinColumn(name="transfer_id", referencedColumnName = "id_transfer", nullable=false)
+    @JoinColumn(name="transaction_id", referencedColumnName = "id_transaction", nullable=false)
     private Transaction transaction;
 
     @ManyToOne
@@ -28,19 +28,19 @@ public class Item implements Serializable{
     private Product product;
 
     @Enumerated(EnumType.STRING)
-    private ProductCategory productCategory;
+    private ItemCategory itemCategory;
 
     public Item() {
     }
 
     public Item(String name, BigDecimal price, BigDecimal amount, BigDecimal fullPrice,
-                Transaction transaction, Product product, ProductCategory productCategory) {
+                Transaction transaction, Product product, ItemCategory itemCategory) {
         this.price = price;
         this.amount = amount;
         this.fullPrice = fullPrice;
         this.transaction = transaction;
         this.product = product;
-        this.productCategory = productCategory;
+        this.itemCategory = itemCategory;
     }
 
     public Long getId() {
@@ -79,12 +79,12 @@ public class Item implements Serializable{
         return amount.multiply(price);
     }
 
-    public ProductCategory getProductCategory() {
-        return productCategory;
+    public ItemCategory getItemCategory() {
+        return itemCategory;
     }
 
-    public void setProductCategory(ProductCategory productCategory) {
-        this.productCategory = productCategory;
+    public void setItemCategory(ItemCategory itemCategory) {
+        this.itemCategory = itemCategory;
     }
 
     public Transaction getTransaction() {

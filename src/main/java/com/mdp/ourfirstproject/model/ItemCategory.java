@@ -1,6 +1,6 @@
 package com.mdp.ourfirstproject.model;
 
-public enum ProductCategory {
+public enum ItemCategory {
 
     GIFTS("Dary"), TAXES("Podatki"), TEMPORAL("Okresowe"), HOUSECARE("Utrzymanie domu"),
     FOOD("Pożywienie"), ADDICTIONS("Nałogowe"), TRANSPORT("Transport"), INSURANCE("Ubezpieczenie"),
@@ -9,7 +9,7 @@ public enum ProductCategory {
 
     private String name;
 
-    ProductCategory(String name)
+    ItemCategory(String name)
     {
         this.name = name;
     }

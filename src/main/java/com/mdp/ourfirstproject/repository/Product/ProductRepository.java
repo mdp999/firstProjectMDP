@@ -1,7 +1,6 @@
 package com.mdp.ourfirstproject.repository.Product;
 
 import com.mdp.ourfirstproject.model.Product;
-import com.mdp.ourfirstproject.model.ProductCategory;
 import com.mdp.ourfirstproject.repository.util.PersistenceUtilFactory;
 
 import javax.persistence.EntityManager;
@@ -90,14 +89,6 @@ public class ProductRepository implements IProductRepository {
         return product;
     }
 
-    @Override
-    public List<Product> findByProductCategory(ProductCategory productCategory) {
-        List<Product> products = new ArrayList<>();
-        Query query = entityManager.createQuery("Select product from Product product where product.category=:pCategory", Product.class);
-        query.setParameter("pCategory", productCategory);
-        products = query.getResultList();
-        return products;
-    }
 
     @Override
     public List<Product> findByProducer(String producerName) {

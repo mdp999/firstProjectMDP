@@ -1,7 +1,7 @@
 package com.mdp.ourfirstproject.repository.Transaction;
 
 import com.mdp.ourfirstproject.model.CashType;
-import com.mdp.ourfirstproject.model.ProductCategory;
+import com.mdp.ourfirstproject.model.ItemCategory;
 import com.mdp.ourfirstproject.model.Transaction;
 import com.mdp.ourfirstproject.model.TransactionType;
 
@@ -15,7 +15,7 @@ public interface ITransactionRepository {
     boolean deleteById(long id) throws TransactionException;
     boolean update(Transaction transaction) throws TransactionException;
     Transaction findById(long id) throws TransactionException;
-    List<Transaction> findByProductCategory(ProductCategory productCategory);
+    List<Transaction> findByProductCategory(ItemCategory itemCategory);
     List<Transaction> findByTransactionType(TransactionType transactionType);
     List<Transaction> findByCashType(CashType cashType);
     List<Transaction> findByDate(Date minDate, Date maxDate);

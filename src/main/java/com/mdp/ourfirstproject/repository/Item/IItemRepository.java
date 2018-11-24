@@ -1,7 +1,7 @@
 package com.mdp.ourfirstproject.repository.Item;
 
 import com.mdp.ourfirstproject.model.Item;
-import com.mdp.ourfirstproject.model.ProductCategory;
+import com.mdp.ourfirstproject.model.ItemCategory;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public interface IItemRepository {
     Item findById(long id) throws ItemException;
 
     Item findByName(String itemName);
-    List<Item> findByProductCategory(ProductCategory itemCategory);
+    List<Item> findByProductCategory(ItemCategory itemCategory);
 
     List<Item> findByProduct(String productName);
 
