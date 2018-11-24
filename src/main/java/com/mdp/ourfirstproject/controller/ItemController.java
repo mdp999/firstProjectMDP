@@ -11,13 +11,7 @@ import java.math.BigDecimal;
 @Controller
 public class ItemController {
 
-
-    private ItemService itemService;
-
-    @Autowired
-    public ItemController(ItemService itemService) {
-        this.itemService = itemService;
-    }
+    private ItemService itemService = new ItemService();
 
     @RequestMapping("/")
     public String hello()

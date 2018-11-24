@@ -11,12 +11,7 @@ import java.util.List;
 @Controller
 public class ProductController {
 
-    private ProductService productService;
-
-    @Autowired
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
+    private ProductService productService = new ProductService();
 
     @GetMapping(value = "/product/create")
     public String createProductGet()

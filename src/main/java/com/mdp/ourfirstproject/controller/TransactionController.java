@@ -13,13 +13,7 @@ import java.util.List;
 @Controller
 public class TransactionController {
 
-
-    private TransactionService transactionService;
-
-    @Autowired
-    public TransactionController(TransactionService transactionService) {
-        this.transactionService = transactionService;
-    }
+    private TransactionService transactionService = new TransactionService();
 
     @GetMapping(value = "/transaction/create")
     public String createTransactionGet(@RequestParam String name, @RequestParam String description,

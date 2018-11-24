@@ -1,37 +1,38 @@
 package com.mdp.ourfirstproject.service;
 
 import com.mdp.ourfirstproject.model.CashType;
-import com.mdp.ourfirstproject.model.ProductCategory;
 import com.mdp.ourfirstproject.model.Transaction;
 import com.mdp.ourfirstproject.model.TransactionType;
+import com.mdp.ourfirstproject.repository.Transaction.ITransactionRepository;
+import com.mdp.ourfirstproject.repository.Transaction.TransactionException;
 import com.mdp.ourfirstproject.repository.Transaction.TransactionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-@Service
 public class TransactionService {
 
-
-    private TransactionRepository transactionRepository;
-
-    @Autowired
-    public TransactionService(TransactionRepository transactionRepository) {
-        this.transactionRepository = transactionRepository;
-    }
+    private ITransactionRepository transactionRepository = new TransactionRepository();
     
     public void create(String name, String description, String cashType,
                        String transactionType, Date transferDate) {
-        transactionRepository.save(new Transaction(name, description, CashType.valueOf(cashType),
-                TransactionType.valueOf(transactionType), transferDate));
+        try {
+            transactionRepository.save(new Transaction(name, description, CashType.valueOf(cashType),
+                    TransactionType.valueOf(transactionType), transferDate));
+        } catch (TransactionException e) {
+            e.printStackTrace();
+        }
     }
 
     public Transaction readById(long id) {
-        return transactionRepository.findById(id).get();
+        try {
+            return transactionRepository.findById(id);
+        } catch (TransactionException e) {
+            e.printStackTrace();
+        }
+        throw new NotImplementedException();
     }
 
     public List<Transaction> readByName(String name) {
@@ -45,7 +46,11 @@ public class TransactionService {
     }
 
     public void delete(long id) {
-        transactionRepository.deleteById(id);
+        try {
+            transactionRepository.deleteById(id);
+        } catch (TransactionException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Transaction> getByTransferType(String transactionString) {

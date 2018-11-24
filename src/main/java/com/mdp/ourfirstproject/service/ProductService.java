@@ -2,31 +2,34 @@ package com.mdp.ourfirstproject.service;
 
 import com.mdp.ourfirstproject.model.Product;
 import com.mdp.ourfirstproject.model.ProductCategory;
+import com.mdp.ourfirstproject.repository.Product.IProductRepository;
+import com.mdp.ourfirstproject.repository.Product.ProductException;
 import com.mdp.ourfirstproject.repository.Product.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-
-@Service
 public class ProductService {
 
-    private ProductRepository productRepository;
-
-    @Autowired
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+    private IProductRepository productRepository = new ProductRepository();
 
     public void create(String name, BigDecimal tax, String description, BigDecimal amount, String categoryStr)
     {
-        productRepository.save(new Product(name, tax, description, amount, ProductCategory.valueOf(categoryStr)));
+        try {
+            productRepository.save(new Product(name, tax, description, amount, ProductCategory.valueOf(categoryStr)));
+        } catch (ProductException e) {
+            e.printStackTrace();
+        }
     }
     
     public Product readById(Long id){
-        return productRepository.findById(id).get();
+        try {
+            return productRepository.findById(id);
+        } catch (ProductException e) {
+            e.printStackTrace();
+        }
+        throw new NotImplementedException();
     }
 
     public void update(Long id, String name, BigDecimal tax, String description, BigDecimal amount, String productCategory) {
@@ -34,11 +37,11 @@ public class ProductService {
         //productRepository.
     }
 
-    public void delete(Long id) {
+    public void delete(Long id) throws ProductException {
         productRepository.deleteById(id);
     }
     
-    public List<Product> readByName(String productName) {
+    public Product readByName(String productName) {
         return productRepository.findByName(productName);
     }
     

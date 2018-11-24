@@ -23,13 +23,6 @@ import java.util.Date;
 
 import static org.junit.Assert.*;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(
-//        SpringBootTest.WebEnvironment.MOCK,
-        classes = TransactionRepositoryTest.class)
-@AutoConfigureMockMvc
-@TestPropertySource(
-        locations = "classpath:application-integrationtest.properties")
 public class TransactionRepositoryTest {
 
     @Autowired
